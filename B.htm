@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)file:///H:/Flash/A.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>A</title>
+
+<script src="./B_files/easeljs-0.7.1.min.js"></script>
+<script src="./B_files/tweenjs-0.5.1.min.js"></script>
+<script src="./B_files/movieclip-0.7.1.min.js"></script>
+<script src="./B_files/preloadjs-0.4.1.min.js"></script>
+<script src="./B_files/A.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib.A();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+	stage.enableMouseOver();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="1100" height="600" style="background-color: rgb(255, 255, 255);"></canvas>
+
+</body></html>
