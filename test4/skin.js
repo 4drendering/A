@@ -1,7 +1,7 @@
 // Garden Gnome Software - Skin
 // Object2VR 3.0beta4/10565
 // Filename: ARMAN2.ggsk
-// Generated Sun Jan 22 19:18:35 2017
+// Generated Sun Jan 22 21:29:37 2017
 
 function object2vrSkin(player,base) {
 	var me=this;
@@ -85,6 +85,11 @@ function object2vrSkin(player,base) {
 			}
 		}
 		return r;
+	}
+	
+	this.preloadImages=function() {
+		var preLoadImg=new Image();
+		preLoadImg.src=basePath + 'images/button_1__o.png';
 	}
 	
 	this.addSkin=function() {
@@ -934,6 +939,40 @@ function object2vrSkin(player,base) {
 		this._fullscreen.appendChild(this._tt_fullscreen);
 		this._controller.appendChild(this._fullscreen);
 		this.divSkin.appendChild(this._controller);
+		this._button_1=document.createElement('div');
+		this._button_1.ggId="Button 1";
+		this._button_1.ggParameter={ rx:0,ry:0,a:0,sx:1,sy:1 };
+		this._button_1.ggVisible=true;
+		this._button_1.className='ggskin ggskin_button';
+		this._button_1.ggType='button';
+		hs ='position:absolute;';
+		hs+='left: 69px;';
+		hs+='top:  117px;';
+		hs+='width: 77px;';
+		hs+='height: 58px;';
+		hs+=cssPrefix + 'transform-origin: 50% 50%;';
+		hs+='visibility: inherit;';
+		hs+='cursor: pointer;';
+		this._button_1.setAttribute('style',hs);
+		this._button_1__img=document.createElement('img');
+		this._button_1__img.className='ggskin ggskin_button';
+		this._button_1__img.setAttribute('src',basePath + 'images/button_1.png');
+		this._button_1__img.setAttribute('style','position: absolute;top: 0px;left: 0px;-webkit-user-drag:none;');
+		this._button_1__img.className='ggskin ggskin_button';
+		this._button_1__img['ondragstart']=function() { return false; };
+		me.player.checkLoaded.push(this._button_1__img);
+		this._button_1.appendChild(this._button_1__img);
+		this._button_1.onclick=function () {
+			me.player.changeViewState("3",0);
+		}
+		this._button_1.onmouseover=function () {
+			me._button_1__img.src=basePath + 'images/button_1__o.png';
+		}
+		this._button_1.onmouseout=function () {
+			me._button_1__img.src=basePath + 'images/button_1.png';
+		}
+		this.divSkin.appendChild(this._button_1);
+		this.preloadImages();
 		this.divSkin.ggUpdateSize=function(w,h) {
 			me.updateSize(me.divSkin);
 		}
