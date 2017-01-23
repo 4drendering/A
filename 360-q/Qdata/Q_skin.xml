@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano version="1.18.3">
+
+    
+  <!-- Spot Style - Default Point Spot Style 2 -->
+  <style name="IconDefaultPointSpotStyle2"
+         url="%FIRSTXML%/spots/hotspot_plan_sequence_user_defaultpoint1.png"
+         visible="false"
+         frame="0"
+         lastframe="9"
+         framewidth="67"
+         frameheight="67"
+         stopspotsequence="false"
+         crop="0|0|67|67"
+         onloaded="startspotanimation(0.1);"
+         onhover="onhoverIconDefaultPointSpotStyle2"
+         onout="onoutIconDefaultPointSpotStyle2"
+         height="23"
+         width="61"
+         />
+  <action name="onhoverIconDefaultPointSpotStyle2">
+    showtooltip('hotspot');
+  </action>
+  <action name="onoutIconDefaultPointSpotStyle2">
+    hideTooltip();
+
+
+
+  </action>
+
+
+
+  <!-- ************ -->
+  <!-- Logo : viewport / topleft -->
+  <!-- ************ -->
+
+  <layer align="topleft"
+         x="10"
+         y="10"
+         zorder="0"
+         name="logo"
+         keep="true"
+         visible="false"
+         capture="false"
+
+         url="%FIRSTXML%/graphics/logo/concept_interior_design_-_logo.png" 
+         handcursor="false"
+
+         height="180"
+         width="180"
+
+         />
+
+  <events name="logoevents" 
+    onTourStart="showlogo();"
+    keep="true" />
+
+  <action name="hidelogo">
+    set(layer[logo].visible, false);
+  </action>
+  <action name="showlogo">
+      set(layer[logo].visible, true);
+  </action>
+
+
+
+<layer name="logoTooltipStyle"
+	keep="true"
+	enabled="false"
+	capture="false"
+	url="%FIRSTXML%/graphics/textfield.swf"
+	align="center"
+	background="false"
+	border="false"
+	css="color:#ffffff;font-family:Arial;font-weight:bold;font-size:14px;text-align:left;"
+	height="20"
+	autoheight="true"
+	autowidth="auto"
+	edge="bottom"
+	selectable="false"
+	zorder="0"
+	padding="2"
+	xoffset="0"
+	yoffset="0"
+	visible="false"
+	html=""
+/>
+
+
+<!-- ********* -->
+<!-- Gyroscope -->
+<!-- ********* -->
+<plugin name="gyroscope"
+        url="graphics/gyro.js"
+        keep="true"
+        devices="no-desktop.and.html5"
+
+
+        friction="0.5"
+        onavailable="delayedcall(1, checkGyroAvailability(););"
+        enabled="false"
+        activated="false"
+        />
+
+<events name="gyroscopeEvents" onnewpano="planarGyroscopeTest();" keep="true" />
+
+<action name="planarGyroscopeTest">
+  if(plugin[gyroscope],
+    ifnot (plugin[gyroscope].available === undefined, 
+      if (plugin[gyroscope].available,
+        if(scene[get(xml.scene)].planar,
+          if(plugin[gyroscope].enabled,
+            switch(plugin[gyroscope].enabled);
+            if (plugin[gyroscope].enabled, events.dispatch(ongyroscopeon);, events.dispatch(ongyroscopeoff););
+          );
+        ,
+          if(plugin[gyroscope].activated,
+            ifnot(plugin[gyroscope].enabled,
+              switch(plugin[gyroscope].enabled);
+              if (plugin[gyroscope].enabled, events.dispatch(ongyroscopeon);, events.dispatch(ongyroscopeoff););
+            );
+          );
+        );
+      );
+    );
+  );
+</action>
+
+<action name="changeGyroscopeState">
+  if(plugin[gyroscope],
+    ifnot (plugin[gyroscope].available === undefined,
+      if (plugin[gyroscope].available,
+        if(%1,
+          set(plugin[gyroscope].activated,true);
+        ,
+          set(plugin[gyroscope].activated,false);
+        );
+        if (%1 !=  plugin[gyroscope].enabled,
+          if(plugin[gyroscope].activated,
+            switch(plugin[gyroscope].enabled);
+          ,
+            set(plugin[gyroscope].enabled, false);
+          );
+          if (plugin[gyroscope].enabled, events.dispatch(ongyroscopeon);, events.dispatch(ongyroscopeoff););
+        );
+      );
+    );
+  );
+</action>
+
+<action name="checkGyroAvailability">
+  if(plugin[gyroscope],
+    ifnot (plugin[gyroscope].available === undefined, 
+      if (plugin[gyroscope].available,
+        ifnot(scene[get(xml.scene)].planar,
+          switch(plugin[gyroscope].enabled);
+          set(plugin[gyroscope].activated,true);
+        );
+        set(tour_gyroscopedevices, true);
+        events.dispatch(ongyroscopeavailable);
+      ,
+        set(tour_gyroscopedevices, false);
+      );
+    ,
+      set(tour_gyroscopedevices, false);
+    );
+    if (plugin[gyroscope].enabled, events.dispatch(ongyroscopeon);, events.dispatch(ongyroscopeoff););
+  );
+</action>
+
+</krpano>
