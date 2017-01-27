@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[New Project]]></data>
+  <data name="en_project_author_name"><![CDATA[Arman]]></data>
+  <data name="en_project_author_url"><![CDATA[http://4drendering.wixsite.com/render]]></data>
+
+
+  <data name="en_panogroup79_title"><![CDATA[Group 79]]></data>
+
+  <data name="en_pano72_title"><![CDATA[AIM 1]]></data>
+  <data name="en_pano91_title"><![CDATA[AIM 2]]></data>
+  <data name="en_pano75_title"><![CDATA[AIM 4]]></data>
+  <data name="en_pano74_title"><![CDATA[AIM 3]]></data>
+  <data name="en_pano76_title"><![CDATA[AIM 5]]></data>
+  <data name="en_pano77_title"><![CDATA[AIM 6]]></data>
+
+
+
+
+
+	<data name="en_panogroup79_floor_title"><![CDATA[Group 79]]></data>
+	<data name="en_spotmap85_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap87_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap88_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap89_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap90_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap99_tooltip"><![CDATA[]]></data>
+
+
+  <data name="en_project_description"><![CDATA[http://4drendering.wixsite.com/render]]></data>
+
+  <data name="en_panogroup79_description"><![CDATA[<a href="http://4drendering.wixsite.com/render" target="_blank">http://4drendering.wixsite.com/render</a>]]></data>
+
+
+
+
+
+
+
+
+</krpano>
