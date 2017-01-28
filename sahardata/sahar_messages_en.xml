@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[]]></data>
+
+
+  <data name="en_panogroup43_title"><![CDATA[Group 43]]></data>
+
+  <data name="en_pano38_title"><![CDATA[3D-interior-hotel-reception-room-designs]]></data>
+  <data name="en_pano32_title"><![CDATA[RIGHT5]]></data>
+  <data name="en_pano31_title"><![CDATA[LEFT E]]></data>
+  <data name="en_pano30_title"><![CDATA[FRONT1]]></data>
+  <data name="en_pano29_title"><![CDATA[B]]></data>
+  <data name="en_pano28_title"><![CDATA[2]]></data>
+  <data name="en_pano40_title"><![CDATA[6164000682_e1d1ea7541_b]]></data>
+  <data name="en_pano89_title"><![CDATA[Resize of static1]]></data>
+
+
+
+
+	<data name="en_project_floor_title"><![CDATA[]]></data>
+
+	<data name="en_panogroup43_floor_title"><![CDATA[Group 43]]></data>
+	<data name="en_spotmap112_tooltip"><![CDATA[RIGHT5]]></data>
+	<data name="en_spotmap137_tooltip"><![CDATA[FRONT1]]></data>
+	<data name="en_spotmap138_tooltip"><![CDATA[LEFT E]]></data>
+	<data name="en_spotmap139_tooltip"><![CDATA[B]]></data>
+	<data name="en_spotmap140_tooltip"><![CDATA[3D-interior-hotel-reception-room-designs]]></data>
+	<data name="en_spotmap141_tooltip"><![CDATA[6164000682_e1d1ea7541_b]]></data>
+	<data name="en_spotmap142_tooltip"><![CDATA[Resize of static1]]></data>
+	<data name="en_spotmap143_tooltip"><![CDATA[B]]></data>
+
+  <data name="en_logowebsiteurl"><![CDATA[]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>
