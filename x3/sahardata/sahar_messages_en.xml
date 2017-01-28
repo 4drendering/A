@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[]]></data>
+
+
+  <data name="en_panogroup178_title"><![CDATA[Group 178]]></data>
+
+  <data name="en_pano172_title"><![CDATA[Resize of LEFT E]]></data>
+  <data name="en_pano171_title"><![CDATA[Resize of FRONT1]]></data>
+  <data name="en_pano168_title"><![CDATA[Resize of B]]></data>
+  <data name="en_pano167_title"><![CDATA[Resize of 2]]></data>
+  <data name="en_pano173_title"><![CDATA[Resize of RIGHT5]]></data>
+  <data name="en_pano177_title"><![CDATA[22]]></data>
+
+
+
+
+	<data name="en_project_floor_title"><![CDATA[]]></data>
+
+	<data name="en_panogroup178_floor_title"><![CDATA[Group 178]]></data>
+	<data name="en_spotmap180_tooltip"><![CDATA[Resize of RIGHT5]]></data>
+	<data name="en_spotmap181_tooltip"><![CDATA[Resize of FRONT1]]></data>
+	<data name="en_spotmap182_tooltip"><![CDATA[Resize of LEFT E]]></data>
+	<data name="en_spotmap183_tooltip"><![CDATA[Resize of B]]></data>
+	<data name="en_spotmap184_tooltip"><![CDATA[Resize of 2]]></data>
+	<data name="en_spotmap185_tooltip"><![CDATA[22]]></data>
+
+  <data name="en_logowebsiteurl"><![CDATA[]]></data>
+
+
+
+
+
+
+
+
+
+
+</krpano>
