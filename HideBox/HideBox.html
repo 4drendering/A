@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js canvas - geometry - cube</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #f0f0f0;
+				margin: 0px;
+				overflow: hidden;
+
+				
+			}
+			#contentinfo  {
+			float: right;
+			width: 10%;
+			height: 100px;	
+			display: inline;
+			}
+
+			#container
+			{
+				width: 10%;
+				float: left;
+				display: inline;
+			}
+		</style>
+	</head>
+	<body>
+
+	<div id = "contentinfo" >
+                <legend>Colors:</legend>
+                        <input type="checkbox" id="Red" value="RED" onclick = "OnColorCheckBox(ColorEnum.RED);" />Red<br />
+                        <input type="checkbox" id="Green" value="GREEN" onclick = "OnColorCheckBox(ColorEnum.GREEN);" />Green<br />
+                        <input type="checkbox" id="Blue" value="BLUE" onclick = "OnColorCheckBox(ColorEnum.BLUE);" />Blue<br />						
+                        <input type="checkbox" id="Pink" value="PINK" onclick = "OnColorCheckBox(ColorEnum.PINK);" />Pink<br />
+                        <input type="checkbox" id="Yellow" value="YELLOW"onclick = "OnColorCheckBox(ColorEnum.YELLOW);"  />Yellow<br />
+                        
+						<br></br>
+						 <legend>Row Number</legend>
+                        <input type="checkbox" id="Row0" value="One" onclick = "OnRowCheckBox(0);"  />One<br />
+                        <input type="checkbox" id="Row1" value="Two" onclick = "OnRowCheckBox(1);"  />Two<br />
+                        <input type="checkbox" id="Row2" value="Three" onclick = "OnRowCheckBox(2);"  />Three<br />
+						<input type="checkbox" id="Row3" value="Four" onclick = "OnRowCheckBox(3);"  />Four<br />
+                        <input type="checkbox" id="Row4" value="Five" onclick = "OnRowCheckBox(4);"  />Five<br />
+                        <input type="checkbox" id="Row5" value="Six" onclick = "OnRowCheckBox(5);"  />Six<br />
+                        
+						
+
+		</div>
+
+
+	<div style = "overflow: hidden ">
+		
+
+		<div id = "container" >
+
+		</div>
+	</div>
+	
+
+		<script src="js/three.js"></script>
+
+		<script src="js/renderers/Projector.js"></script>
+		<script src="js/renderers/CanvasRenderer.js"></script>
+
+		<script src="js/libs/stats.min.js"></script>
+
+		
+		<script>
+
+
+		initCheckBoxes();
+
+		function initCheckBoxes()
+		{
+			var inputs = document.querySelectorAll("input[type='checkbox']");
+			for(var i = 0; i < inputs.length; i++) 
+			{
+			  inputs[i].checked = true;   
+			}
+		}
+
+		</script>
+		
+		<script>
+
+
+
+			var view =
+				{
+					left: 0,
+					bottom: 0,
+					width: .8,
+					height: 1.0,
+					//background: new THREE.Color().setRGB( 0.5, 0.5, 0.7 ),
+					eye: [ 0, 300, 1800 ],
+					up: [ 0, 1, 0 ],
+					fov: 30,
+					updateCamera: function ( camera, scene, mouseX, mouseY ) {
+					  camera.position.x += mouseX * 0.05;
+					  camera.position.x = Math.max( Math.min( camera.position.x, 2000 ), -2000 );
+					  camera.lookAt( scene.position );
+					}
+				};
+			var container, stats;
+
+			var camera, scene, renderer;
+
+			var cube, plane;
+
+			var targetRotation = 0;
+			var targetRotationOnMouseDown = 0;
+
+			var mouseX = 0;
+			var mouseXOnMouseDown = 0;
+
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			
+			var CUBESIZE = 20;
+			var XSTART = 0,YSTART = 100,ZSTART = 300;
+
+			ColorEnum = 
+			{
+				RED : "Red",
+				GREEN : "Green",
+				BLUE : "Blue",
+				YELLOW : "Yellow",
+				PINK : "Pink"
+			}
+
+			
+
+			var Cube = class Cube
+			{
+				constructor(x, y, z, mesh, color) 
+				{
+					this.x = x;
+					this.y = y;
+					this.z = z;
+					this.mesh = mesh;
+					this.color = color;
+					
+				}
+			};
+
+			
+		var redVis = true;
+		var greenVis = true;
+		var blueVis = true;
+		var pinkVis = true;
+		var yellowVis = true;
+
+		var rowsVisible = [];
+			
+			
+			var cubes = [];
+
+			init();
+			animate();
+
+
+
+			function init() {
+
+				//container = document.createElement( 'div' );
+				//document.body.appendChild( container );
+				
+				for(i = 0; i < 6; i++)
+				{
+					rowsVisible[i] = true;
+				}
+				
+				//document.getElementById("test").appendChild(container);
+
+				container = document.getElementById("container");
+
+				/*
+				var info = document.createElement( 'div' );
+				info.style.position = 'absolute';
+				info.style.top = '10px';
+				info.style.width = '100%';
+				info.style.textAlign = 'center';
+				info.innerHTML = 'Drag to spin the cube';
+				
+				//container.appendChild(document.document.getElementById("Menu"));
+				container.appendChild( info );
+				*/
+
+
+
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+				
+				camera.position.y = 200;
+				camera.position.z = 400;
+				camera.position.x = 200;
+				
+					camera.up.x = view.up[ 0 ];
+					camera.up.y = view.up[ 1 ];
+					camera.up.z = view.up[ 2 ];
+				view.camera = camera;
+
+
+
+
+
+				
+				camera.rotation.y =  45 * Math.PI / 180
+				scene = new THREE.Scene();
+
+				// Cube
+				
+				group = new THREE.Object3D();//create an empty container
+				group.position.x = XSTART;
+				group.position.y = YSTART;
+				group.position.z = ZSTART;
+
+				group.add( addCube(ColorEnum.RED,0,0,0) );
+				group.add( addCube(ColorEnum.GREEN,0,0,1) );
+				group.add( addCube(ColorEnum.GREEN,0,0,2) );
+				group.add( addCube(ColorEnum.RED,0,0,3) );
+				group.add( addCube(ColorEnum.GREEN,0,0,4) );
+
+				group.add( addCube(ColorEnum.RED,1,0,0) );
+				
+				group.add( addCube(ColorEnum.PINK,1,0,3) );
+				group.add( addCube(ColorEnum.GREEN,2,0,0) );
+
+				//LEVEL 2
+				group.add( addCube(ColorEnum.PINK,0,1,0) );
+				group.add( addCube(ColorEnum.PINK,0,1,4) );
+
+				
+				group.add( addCube(ColorEnum.RED,1,1,0) );
+
+				group.add( addCube(ColorEnum.GREEN,2,1,0) );
+
+				//LEVEL 3
+
+				group.add( addCube(ColorEnum.YELLOW,0,2,4) );
+
+				group.add( addCube(ColorEnum.PINK,1,2,0) );
+
+				group.add( addCube(ColorEnum.GREEN,2,2,0) );
+
+				//LEVEL 4
+
+				group.add( addCube(ColorEnum.YELLOW,2,3,0) );
+				
+
+
+
+
+
+				scene.add( group );//when done, add the group to the scene
+
+				// Plane
+				/*
+				var geometry = new THREE.PlaneBufferGeometry( 200, 200 );
+				geometry.rotateX( - Math.PI / 2 );
+
+				var material = new THREE.MeshBasicMaterial( { color: 0xe0e0e0, overdraw: 0.5 } );
+
+				plane = new THREE.Mesh( geometry, material );
+				*/
+				//scene.add( plane );
+				
+
+
+				renderer = new THREE.CanvasRenderer();
+				renderer.setClearColor( 0xf0f0f0 );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+
+				stats = new Stats();
+				container.appendChild( stats.dom );
+
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			
+
+			
+			function addCube( ecolor, x, y, z)
+			{
+				var geometry = new THREE.BoxGeometry( CUBESIZE, CUBESIZE, CUBESIZE );
+				var boxcolor = 0xae030e;
+
+				switch(ecolor) 
+				{
+					 case ColorEnum.RED:
+					  boxcolor = 0xae030e;  
+					  break;
+    
+					 case ColorEnum.BLUE:
+					  boxcolor = 0x357ebd;  
+					  break;
+
+					  
+					 case ColorEnum.GREEN:
+					  boxcolor = 0x7cfc00;  
+					  break;
+					  
+					 case ColorEnum.YELLOW:
+					  boxcolor = 0xfcd20b;  
+					  break;
+					  
+					 case ColorEnum.PINK:
+					  boxcolor = 0xffd1d1;  
+					  break;
+
+					default:
+				}
+				var material = new THREE.MeshBasicMaterial( { color:  boxcolor, opacity: 1 } );
+
+				cube = new THREE.Mesh( geometry, material );
+
+				cube.position.y = CUBESIZE * y ;
+				cube.position.z = CUBESIZE * z * -1;
+				cube.position.x = CUBESIZE * x * -1;
+				
+				cubes.push(new Cube(x,y,z,cube,ecolor,));
+				return cube;
+				//cube.position.y = ;
+			}
+			
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			function onDocumentMouseDown( event ) {
+
+				event.preventDefault();
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+				document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+				mouseXOnMouseDown = event.clientX - windowHalfX;
+				targetRotationOnMouseDown = targetRotation;
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = event.clientX - windowHalfX;
+
+				targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.02;
+
+			}
+
+			function onDocumentMouseUp( event ) {
+
+				document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+				document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+			}
+
+			function onDocumentMouseOut( event ) {
+
+				document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+				document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+			}
+
+			function onDocumentTouchStart( event ) {
+
+				if ( event.touches.length === 1 ) {
+
+					event.preventDefault();
+
+					mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
+					targetRotationOnMouseDown = targetRotation;
+
+				}
+
+			}
+
+			function onDocumentTouchMove( event ) {
+
+				if ( event.touches.length === 1 ) {
+
+					event.preventDefault();
+
+					mouseX = event.touches[ 0 ].pageX - windowHalfX;
+					targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
+
+				}
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				stats.begin();
+				render();
+				stats.end();
+
+			}
+
+
+			function OnColorCheckBox( id)
+			{
+			
+			switch(id) 
+				{
+					 case ColorEnum.RED:
+					  redVis = document.getElementById("Red").checked;
+					  break;
+    
+					 case ColorEnum.BLUE:
+					  blueVis = document.getElementById("Blue").checked; 
+					  break;
+
+					  
+					 case ColorEnum.GREEN:
+					  greenVis = document.getElementById("Green").checked;
+					  break;
+					  
+					 case ColorEnum.YELLOW:
+					  yellowVis = document.getElementById("Yellow").checked;
+					  break;
+					  
+					 case ColorEnum.PINK:
+					  pinkVis = document.getElementById("Pink").checked;
+					  break;
+
+					default:
+				}
+				UpdateCubeVisibility();
+			}
+
+			function OnRowCheckBox(id)
+			{
+				rowsVisible[id] = document.getElementById('Row'+id).checked;
+				UpdateCubeVisibility();
+			}
+
+			function UpdateCubeVisibility()
+			{
+				for( i = 0; i < cubes.length; i++)
+				{
+					switch(cubes[i].color) 
+				{
+					 case ColorEnum.RED:
+					 cubes[i].mesh.visible = (redVis && rowsVisible[cubes[i].z]);
+					  break;
+    
+					 case ColorEnum.BLUE:
+					 cubes[i].mesh.visible = (blueVis && rowsVisible[cubes[i].z]);
+					  break;
+
+					  
+					 case ColorEnum.GREEN:
+					  
+					 cubes[i].mesh.visible = (greenVis && rowsVisible[cubes[i].z]);
+					  break;
+					  
+					 case ColorEnum.YELLOW:
+					 cubes[i].mesh.visible = (yellowVis && rowsVisible[cubes[i].z]);
+					  break;
+					  
+					 case ColorEnum.PINK:
+					 cubes[i].mesh.visible = (pinkVis&& rowsVisible[cubes[i].z]);
+					  break;
+
+					default:
+				}
+				}
+			}
+
+
+			function render() {
+
+				group.rotation.y += ( targetRotation - group.rotation.y ) * 0.05;
+				
+
+					renderer.setSize ( window.innerWidth  , window.innerHeight );
+
+					var left   = Math.floor( window.innerWidth  * view.left );
+					var bottom = Math.floor( window.innerHeight * view.bottom );
+					var width  = Math.floor( window.innerWidth  * view.width );
+					var height = Math.floor( window.innerHeight * view.height );
+					renderer.setViewport( left, bottom, width, height );
+					renderer.setScissor( left, bottom, width, height );
+					renderer.setScissorTest( true );
+					renderer.setClearColor( view.background );
+
+					camera.aspect = width / height;
+					camera.updateProjectionMatrix();
+
+					renderer.render( scene, camera );
+
+
+
+				//renderer.render( scene, camera );
+
+			}
+
+		</script>
+		
+		
+	</body>
+</html>
