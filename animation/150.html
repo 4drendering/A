@@ -52,7 +52,7 @@
 
             scene.add(new THREE.AmbientLight(0x161616, 1));
 
-            renderer = new THREE.WebGLRenderer( { antialias: true });
+            renderer = new THREE.WebGLRenderer( );
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
@@ -60,7 +60,7 @@
             window.addEventListener('resize', onWindowResize, false);
 
             var loader = new THREE.JDLoader();
-            loader.load("model/model.jd",
+            loader.load("model/150.jd",
                         function (data)
                         {
                             var multiMaterial = new THREE.MultiMaterial(data.materials);
@@ -90,7 +90,7 @@
                             scene.add(camera);  //mainLight.position.copy(camera.position);
                             camera.add(new THREE.DirectionalLight(0xFFFFFF, 1));                            
                             if (!controls)
-                               controls = new THREE.TrackballControls( camera );
+                               controls = new THREE.TrackballControls( camera,renderer.domElement );
 							   //controls = new THREE.OrbitControls(camera, renderer.domElement);
                             controls.target.copy(data.boundingSphere.center);
 							console.log(controls.minDistance + "  " + controls.maxDistance );
@@ -107,7 +107,7 @@
                         });
 
         }
-
+		var lastVal;
         function animate()
         {
             var delta = clock.getDelta();
@@ -119,13 +119,14 @@
 					mixers[i].update(delta);
 					document.getElementById("range").value = (mixers[i].existingAction (clips[i]).time / clips[i].duration) * 100;
 					}
-					else
+					else if(lastVal != document.getElementById("range").value )
 					{
-					
 						mixers[i].existingAction(clips[i]).time = document.getElementById("range").value / 100 * clips[i].duration;
 						mixers[i].update(delta);	
 					}
 				}
+				
+						lastVal = document.getElementById("range").value ;
 				
             if (controls) controls.update();
 
