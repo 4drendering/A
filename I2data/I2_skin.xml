@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano version="1.18">
+
+  <!-- unsupported kind of display : PointMap -->
+
+
+
+
+	
+	<!-- ********* -->
+	<!-- FloorPlan -->
+	<!-- ********* -->
+	
+	<ptplugin name="floorPlan" engine="KolorFloorPlan">
+		<settings>
+			<option name="background_color" value="000000" type="string" />
+			<option name="background_lighter_color" value="000000" type="string" />
+			<option name="background_darker_color" value="000000" type="string" />
+			<option name="background_alpha" value="1" type="float" />
+			<option name="text_color" value="000000" type="string" />
+			<option name="resize" value="true" type="bool" />
+			<option name="fp_selector" value="one" type="string" />
+			<option name="fp_selector_label" value="floorPlanmenu_label" type="string" />
+			<option name="display_title" value="false" type="bool" />
+			<option name="title_font" value="Verdana" type="string" />
+			<option name="title_size" value="14" type="int" />
+			<option name="title_weight" value="normal" type="string" />
+			<option name="title_decoration" value="normal" type="string" />
+			<option name="title_color" value="000000" type="string" />
+			<option name="display_orientation" value="false" type="bool" />
+			<option name="display_radar" value="true" type="bool" />
+			<option name="radar_radius" value="50" type="int" />
+			<option name="radar_line_width" value="1" type="int" />
+			<option name="radar_line_color" value="ff0000" type="string" />
+			<option name="radar_line_alpha" value="1" type="float" />
+			<option name="radar_fill_color" value="ff0000" type="string" />
+			<option name="radar_fill_alpha" value="0.700007629510948" type="float" />
+			<option name="selected_effect" value="pulsate" type="string" />
+			<option name="close_on_click" value="false" type="bool" />
+			<option name="zorder" value="0" type="int" />
+		</settings>
+		
+		<floorplanItems selectedItem="fpitemmain" selectedSpot="" selectedSpotScene="" selectedSpotHeading="" selectedSpotFov="">
+				
+				<floorplanItem 
+					name="fpitemmain" 
+					width="2910" 
+					height="1717" 
+					groupName="" 
+					url="floorplan/dd.jpg" 
+					title="project_floor_title"
+					heading="0">
+							<spot name="spotmap12" posX="0.728167" posY="0.640592" heading="0" desc="spotmap12_tooltip" descType="tooltip" groupName="" isScene="true" scene="pano9" jsClick="spotmap12ActionSpotFloorPlan">
+								<icon url="spots/hotspot_image_user_defaultmap0.png" iconWidth="32" iconHeight="32" iconAnchor="center" />
+							</spot>
+							<spot name="spotmap17" posX="0.420664" posY="0.414376" heading="-0.399999999999977" desc="spotmap17_tooltip" descType="tooltip" groupName="" isScene="true" scene="pano13" jsClick="spotmap17ActionSpotFloorPlan">
+								<icon url="spots/hotspot_image_user_defaultmap0.png" iconWidth="32" iconHeight="32" iconAnchor="center" />
+							</spot>
+							<spot name="spotmap18" posX="0.214022" posY="0.587738" heading="173.399999999999" desc="spotmap18_tooltip" descType="tooltip" groupName="" isScene="true" scene="pano15" jsClick="spotmap18ActionSpotFloorPlan">
+								<icon url="spots/hotspot_image_user_defaultmap0.png" iconWidth="32" iconHeight="32" iconAnchor="center" />
+							</spot>
+				</floorplanItem>
+			
+			
+		</floorplanItems>
+	</ptplugin>
+	
+	<action name="kolorFloorplanJsReady-floorPlan">
+		set(ptplugin[floorPlan].jsready, true);
+		
+		ifnot(ptplugin[floorPlan].floorplanItems[0].selectedSpot == "",
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotFov, get(view.hfov));
+			js(invokePluginFunction(floorPlan, setKolorFloorPlanSelectedSpotOptions, get(xml.scene), get(view.hlookat), get(view.hfov)));
+		);
+	</action>
+	
+	
+		<!-- floorplan main spots counter : 3 -->
+			<action name="spotmap12ActionSpotFloorPlan">
+          if (xml.scene != pano9,
+            mainloadscene(pano9);
+          );
+      lookat(-29.700000, -3.600000, 90.000000);
+    
+
+</action>
+			<action name="spotmap17ActionSpotFloorPlan">
+          if (xml.scene != pano13,
+            mainloadscene(pano13);
+          );
+      lookat(130.054793, 15.494809, 50.802654);
+    
+
+</action>
+			<action name="spotmap18ActionSpotFloorPlan">
+          if (xml.scene != pano15,
+            mainloadscene(pano15);
+          );
+      lookat(-1.350000, -2.700000, 81.818182);
+    
+
+</action>
+	
+	
+	
+	<events name="floorPlanEvents" 
+	onxmlcomplete="floorPlanActivateDefaultSpot();" 
+	onviewchanged="floorPlanOnViewChange();" 
+	onTourStart="set(loadedState-floorPlanArea, get(tour_displaycontrols));floorPlanOpenTourFloorPlan();"
+	keep="true" />
+	
+	
+	<krpano floorPlanFloorPlanLoaded="false" />
+	
+	<action name="floorPlanHideTourFloorPlan">
+		hideKolorArea-floorPlanArea(false);
+	</action>
+	
+	<action name="floorPlanCloseTourFloorPlan">
+		if(ptplugin[floorPlanArea].isOpen,
+			closeKolorArea-floorPlanArea();
+		);
+	</action>
+	
+	<action name="floorPlanShowTourFloorPlan">
+		showKolorArea-floorPlanArea(false);
+	</action>
+	
+	<action name="floorPlanOpenTourFloorPlan">
+		ifnot(ptplugin[floorPlanArea].isOpen,
+			openKolorArea-floorPlanArea();
+		);
+	</action>
+	
+	<action name="floorPlanOnViewChange">
+		if (floorPlanFloorPlanLoaded == true,
+			ifnot(ptplugin[floorPlan].floorplanItems[0].selectedSpot == "",
+				ifnot(scene[get(xml.scene)].planar,
+					js(invokePluginFunction(floorPlan, changeDirection, get(xml.scene), get(view.hlookat), get(view.hfov)));
+				);
+			);
+		);
+	</action>
+	
+	<action name="floorPlanActivateSpot">
+		
+		set(ptplugin[floorPlan].floorplanItems[0].selectedSpot, %1);
+		set(ptplugin[floorPlan].floorplanItems[0].selectedItem, %2);
+		
+		ifnot(%1 == "",
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotScene, get(xml.scene));
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotHeading, get(view.hlookat));
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotFov, get(view.hfov));
+		);
+		
+		js(invokePluginFunction(floorPlan, selectSpot, %1, %2, %3));
+
+		ifnot(%1 == "",
+			if(scene[get(xml.scene)].planar,
+				js(invokePluginFunction(floorPlan, hideRadar));
+			,
+				js(invokePluginFunction(floorPlan, changeDirection, get(xml.scene), get(view.hlookat), get(view.hfov)));
+			);
+		);
+	</action>
+	
+	<action name="floorPlanDeactivateSpot">
+		set(ptplugin[floorPlan].floorplanItems[0].selectedSpot, "");
+		
+		js(invokePluginFunction(floorPlan, unselectSpot));
+	</action>
+	
+	<action name="floorPlanActivateDefaultSpot">
+		set(floorPlanFloorPlanLoaded, true);
+		
+		set(floorPlanSpotFound, "");
+		set(floorPlanSpotScene, "");
+		set(floorPlanItemFound, "");
+		set(floorPlanItemSearch, true);
+		set(floorPlanSpotSearchActivated, true);
+		set(floorPlanSpotSearchContinue, true);
+		
+		
+		set(defaultfloorplaniteminc-wait,50);
+		for(set(defaultfloorplaniteminc,0), defaultfloorplaniteminc LT ptplugin[floorPlan].floorplanItems[0].floorplanItem.count , inc(defaultfloorplaniteminc),
+			if(defaultfloorplaniteminc-wait == defaultfloorplaniteminc,
+				add(defaultfloorplaniteminc-wait,50);
+				wait(0);
+			);
+			if(floorPlanSpotSearchActivated == true,
+				
+				if(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].groupName == scene[get(xml.scene)].group,
+					set(floorPlanItemFound, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].name));
+					set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].name));
+					set(floorPlanItemSearch, false);
+				,
+					
+					if(floorPlanItemFound == "",
+						set(floorPlanItemFound, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[fpitemmain].name));
+						set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[fpitemmain].name));
+					);
+				);
+			);
+			if(floorPlanSpotSearchActivated == true,
+				set(defaultspotinc-wait,50);
+				for(set(defaultspotinc,0), defaultspotinc LT ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot.count , inc(defaultspotinc),
+					if(defaultspotinc-wait == defaultspotinc,
+						add(defaultspotinc-wait,50);
+						wait(0);
+					);
+					if(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].isScene == true,
+					
+						if(floorPlanSpotSearchContinue == true,
+							if(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].scene == xml.scene,
+								set(floorPlanSpotFound, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].name));
+								set(floorPlanSpotScene, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].scene));
+								set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].name));
+								if(floorPlanItemSearch == false,
+									set(floorPlanSpotSearchContinue, false);
+									set(floorPlanSpotSearchActivated, false);
+								);
+							);
+						);
+					);
+					
+				);
+			);
+		);
+		
+		if(floorPlanSpotFound == "",
+			
+			
+			floorPlanDeactivateSpot();
+			
+			
+			set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(floorPlanItemFound));
+			
+			
+			ifnot(ptplugin[floorPlan].floorplanItems[0].selectedItem == "",
+				floorPlanActivateSpot("", get(ptplugin[floorPlan].floorplanItems[0].selectedItem), "");
+			);
+		,
+			
+			floorPlanActivateSpot(get(floorPlanSpotFound), get(ptplugin[floorPlan].floorplanItems[0].selectedItem), get(floorPlanSpotScene));
+		);
+	</action>
+	
+	<action name="floorPlanChangeTitle">
+		js(invokePluginFunction(floorPlan, changeTitle, %1));
+	</action>
+	
+	<ptplugin name="floorPlanArea" engine="kolorArea">
+	<settings>
+		<option name="position" value="topleft" type="string" />
+		<option name="start_position" value="left" type="string" />
+		<option name="margin_x" value="0" type="int" />
+		<option name="margin_y" value="0" type="int" />
+		<option name="display_title" value="false" type="bool" />
+		<option name="title_font" value="Verdana" type="string" />
+		<option name="title_size" value="14" type="int" />
+		<option name="title_weight" value="normal" type="string" />
+		<option name="title_decoration" value="normal" type="string" />
+		<option name="title_color" value="000000" type="string" />
+		<option name="close_displayed" value="false" type="bool" />
+		<option name="background_color" value="000000" type="string" />
+		<option name="background_alpha" value="1" type="float" />
+		<option name="overlay_displayed" value="false" type="bool" />
+		<option name="overlay_color" value="000000" type="string" />
+		<option name="overlay_alpha" value="0.500007629510948" type="float" />
+		<option name="padding" value="0" type="int" />
+		<option name="topleft_radius" value="0" type="int" />
+		<option name="topright_radius" value="0" type="int" />
+		<option name="bottomleft_radius" value="0" type="int" />
+		<option name="bottomright_radius" value="0" type="int" />
+		<option name="area_border_width" value="0" type="int" />
+		<option name="area_border_color" value="000000" type="string" />
+		<option name="area_width" value="26" type="int" />
+		<option name="area_height" value="30" type="int" />
+		<option name="area_width_unit" value="percent" type="string" />
+		<option name="area_height_unit" value="percent" type="string" />
+		<option name="animation" value="false" type="bool" />
+		<option name="animation_duration" value="500" type="int" />
+		<option name="close_on_click" value="false" type="bool" />
+		<option name="refresh_content" value="false" type="bool" />
+		<option name="open_callback" value="addKolorFloorPlan('floorPlan', 'floorPlanArea-floorplanDIV');" type="string" />
+		<option name="close_callback" value="invokeKrFunction('closeKolorAreaCallback-floorPlanArea')" type="string" />
+		<option name="zorder" value="0" type="int" />
+	</settings>
+	</ptplugin>
+	
+	<action name="kolorAreaJsReady-floorPlanArea">
+		set(ptplugin[floorPlanArea].jsready, true);
+	</action>
+	
+	<action name="openKolorArea-floorPlanArea">
+		ifnot(ptplugin[floorPlanArea].isOpen,
+			set(ptplugin[floorPlanArea].isOpen, true);
+			set(ptplugin[floorPlanArea].visible, true);
+			set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+			
+			js(showKolorArea(floorPlanArea, &lt;div id="floorPlanArea-floorplanDIV"&gt;&lt;/div&gt;));
+			events.dispatch(onremovedisplayedobject);
+		);
+	</action>
+	
+	<action name="closeKolorArea-floorPlanArea">
+		if(ptplugin[floorPlanArea].isOpen,
+			
+			js(invokePluginFunction(floorPlanArea, closeKolorArea));
+			set(ptplugin[floorPlanArea].isOpen, false);
+		);
+	</action>
+	
+	<action name="toggleKolorArea-floorPlanArea">
+		if(ptplugin[floorPlanArea].isOpen,
+			closeKolorArea-floorPlanArea();
+		,
+			openKolorArea-floorPlanArea();
+		);
+	</action>
+	
+	<action name="closeKolorAreaCallback-floorPlanArea">
+		set(ptplugin[floorPlanArea].isOpen, false);
+	</action>
+	
+	<action name="changeTitleKolorArea-floorPlanArea">
+		js(invokePluginFunction(floorPlanArea, changeTitle, %1));
+	</action>
+	
+	<action name="showKolorArea-floorPlanArea">
+		set(ptplugin[floorPlanArea].visible, true);
+		set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+		
+		js(invokePluginFunction(floorPlanArea, showKolorArea, %1));
+		events.dispatch(onremovedisplayedobject);
+	</action>
+		
+	<action name="hideKolorArea-floorPlanArea">
+		
+		set(ptplugin[floorPlanArea].visible, false);
+		js(invokePluginFunction(floorPlanArea, hideKolorArea, %1));
+	</action>
+	
+	<events name="kolorAreaEvents-floorPlanArea" 
+		keep="true"
+		hidetourcontrols="if(loadedState-floorPlanArea,hideKolorArea-floorPlanArea(false););"
+		showtourcontrols="showKolorArea-floorPlanArea(false);set(loadedState-floorPlanArea, get(tour_displaycontrols));"
+	/>
+	
+	
+
+  <!-- Hide / Show Controls -->
+  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
+  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
+
+
+</krpano>
