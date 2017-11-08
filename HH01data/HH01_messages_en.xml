@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+
+  <data name="en_project_title"><![CDATA[New Project]]></data>
+
+
+
+  <data name="en_pano9_title"><![CDATA[03pano02]]></data>
+
+
+  <data name="en_pano11_title"><![CDATA[room01-pano02 ]]></data>
+
+
+  <data name="en_pano12_title"><![CDATA[room01-panor]]></data>
+
+
+
+
+	<data name="en_project_floor_title"><![CDATA[New Project]]></data>
+	<data name="en_spotmap19_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap20_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap21_tooltip"><![CDATA[]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>
