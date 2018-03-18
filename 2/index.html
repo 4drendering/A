@@ -1,0 +1,220 @@
+<html long="en">
+
+<head>
+    <title>Project Italy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/resp.css">
+
+    <script src="tjs/three.js"></script>
+    <script src="tjs/DDSLoader.js"></script>
+    <script src="tjs/MTLLoader.js"></script>
+    <script src="tjs/OBJLoader.js"></script>
+    <script src="tjs/OrbitControls.js"></script>
+    <script src="tjs/Detector.js"></script>
+    <script src="tjs/stats.min.js"></script>
+
+    <script src="jq/jquery.js"></script>
+    <script src="jq/jquery.min.js"></script>
+    <script src="jq/jq.js"></script>
+    <script src="jq/jq2.js"></script>
+
+</head>
+
+<body>
+    <div id="st">SELECT COLOR</div>
+    <div id="body-color">
+
+        <p style="text-align:left;color: w;hite;margin-top: 1px;margin-left: 2%;font-weight: bold;">BODY</p>
+
+    </div>
+    <div id="list-color-body">
+        <div class="red" onclick="bcred()"></div>
+        <div class="blue" onclick="bcblue()"></div>
+        <div class="green" onclick="bcgreen()"></div>
+        <div class="yellow" onclick="bcyellow()"></div>
+        <div class="silver" onclick="bcsilver()"></div>
+        <div class="orange" onclick="bcorange()"></div>
+        <div class="gold" onclick="bcgold()"></div>
+        <div class="brown" onclick="bcbrown()"></div>
+        <div class="white" onclick="bcwhite()"></div>
+        <div class="darkviolet" onclick="bcPurple()"></div>
+        <div class="cyan" onclick="bccyan()"></div>
+        <div class="dimgrey" onclick="bcgray()"></div>
+        <div class="crimson" onclick="bcsccrimson()"></div>
+        <div class="black" onclick="bcblack()"></div>
+
+    </div>
+    <div id="seat-color">
+
+        <p style="text-align:left;;color: white;margin-top: 1px;margin-left: 2%;font-weight: bold;">SEAT</p>
+
+    </div>
+    <div id="list-color-seat">
+        <div class="red" onclick="scred()"></div>
+        <div class="blue" onclick="scblue()"></div>
+        <div class="green" onclick="scgreen()"></div>
+        <div class="yellow" onclick="scyellow()"></div>
+        <div class="silver" onclick="scsilver()"></div>
+        <div class="orange" onclick="scorange()"></div>
+        <div class="gold" onclick="scgold()"></div>
+        <div class="brown" onclick="scbrown()"></div>
+        <div class="white" onclick="scwhite()"></div>
+        <div class="darkviolet" onclick="scPurple()"></div>
+        <div class="cyan" onclick="sccyan()"></div>
+        <div class="dimgrey" onclick="scgray()"></div>
+        <div class="crimson" onclick="sccrimson()"></div>
+        <div class="black" onclick="scblack()"></div>
+    </div>
+    <div id="Wheel-color">
+
+        <p style="text-align:left;color: white;margin-top: 1px;margin-left: 2%;font-weight: bold;">WHEEL</p>
+
+    </div>
+    <div id="list-color-Wheel">
+        <div class="red" onclick="wcred()"></div>
+        <div class="blue" onclick="wcblue()"></div>
+        <div class="green" onclick="wcgreen()"></div>
+        <div class="yellow" onclick="wcyellow()"></div>
+        <div class="silver" onclick="wcsilver()"></div>
+        <div class="orange" onclick="wcorange()"></div>
+        <div class="gold" onclick="wcgold()"></div>
+        <div class="brown" onclick="wcbrown()"></div>
+        <div class="white" onclick="wcwhite()"></div>
+        <div class="darkviolet" onclick="wcPurple()"></div>
+        <div class="cyan" onclick="wccyan()"></div>
+        <div class="dimgrey" onclick="wcgray()"></div>
+        <div class="crimson" onclick="wccrimson()"></div>
+        <div class="black" onclick="wcblack()"></div>
+
+    </div>
+    <div id="handllebar-color">
+
+        <p style="text-align:left;;color: white;margin-top: 1px;margin-left: 2%;font-weight: bold;">HANDLEBAR</p>
+
+    </div>
+    <div id="list-color-handllebar">
+        <div class="red" onclick="hcred()"></div>
+        <div class="blue" onclick="hcblue()"></div>
+        <div class="green" onclick="hcgreen()"></div>
+        <div class="yellow" onclick="hcyellow()"></div>
+        <div class="silver" onclick="hcsilver()"></div>
+        <div class="orange" onclick="hcorange()"></div>
+        <div class="gold" onclick="hcgold()"></div>
+        <div class="brown" onclick="hcbrown()"></div>
+        <div class="white" onclick="hcwhite()"></div>
+        <div class="darkviolet" onclick="hcPurple()"></div>
+        <div class="cyan" onclick="hccyan()"></div>
+        <div class="dimgrey" onclick="hcgray()"></div>
+        <div class="crimson" onclick="hccrimson()"></div>
+        <div class="black" onclick="hcblack()"></div>
+
+    </div>
+    <div id="col">
+        <p id="textp">LOADING...</p>
+    </div>
+    <script>
+        if (Detector.webgl) {
+            var width = window.innerWidth;
+            var container, stats, light;
+            var camera, scene, renderer;
+            var windowHalfX = window.innerWidth / 2;
+            var windowHalfY = window.innerHeight / 2;
+            init();
+            animate();
+
+            function init() {
+                container = document.createElement('div');
+                document.body.appendChild(container);
+                camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+
+
+                // scene
+                scene = new THREE.Scene();
+                var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+                scene.add(ambientLight);
+                var pointLight = new THREE.PointLight(0xffffff, 0.8);
+                camera.add(pointLight);
+                scene.background = new THREE.Color(0xffffff);
+                scene.add(camera);
+                //webgl
+                renderer = new THREE.WebGLRenderer();
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                container.appendChild(renderer.domElement);
+                window.addEventListener('resize', onWindowResize, false);
+                //color
+                mtl = new THREE.MeshBasicMaterial({
+                    color: 0x986666,
+                });
+                // model
+                var onProgress = function(xhr) {
+                    if (xhr.lengthComputable) {
+                        var percentComplete = xhr.loaded / xhr.total * 100;
+                        console.log(Math.round(percentComplete, 2) + '% downloaded');
+                    }
+                };
+                var onError = function(xhr) {};
+                THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+                mtlLoader = new THREE.MTLLoader();
+                mtlLoader.setPath('model/obj/');
+                mtlLoader.load('orginal.mtl', function(materials) {
+                    materials.preload();
+                    objLoader = new THREE.OBJLoader();
+                    objLoader.setMaterials(materials);
+                    objLoader.setPath('model/obj/');
+                    objLoader.load('orginal.obj', function(object) {
+                        object.position.set(0, -70, 20);
+                        object.rotation.set(-1.5, 0, -2.3);
+                        scene.add(object);
+                    }, onProgress, onError);
+                });
+                //
+
+                var controls = new THREE.OrbitControls(camera);
+                controls.minDistance = 205;
+                if (width <= 320) {
+                    camera.position.set(200, 20, 280);
+                }
+                if (width > 320 && width <= 480) {
+                    camera.position.set(100, 20, 280);
+                }
+                if (width > 480) {
+                    camera.position.set(0, 20, 280);
+                }
+
+                controls.update();
+
+                //controls
+
+            }
+
+            function onWindowResize() {
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+
+            //
+            function animate() {
+                requestAnimationFrame(animate);
+                render();
+            }
+
+            function render() {
+                camera.lookAt(scene.position);
+                renderer.render(scene, camera);
+            }
+        }else{
+            document.getElementById("ttx").innerHTML="your browser does not support please update your browser";
+        }
+
+    </script>
+    <p style="color: white;font-weight: bold;position: absolute;text-align: center;" id="ttx"></p>
+</body>
+
+</html>

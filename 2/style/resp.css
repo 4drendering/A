@@ -1,0 +1,129 @@
+@media screen and (min-width:320px) and (max-width:480px) {
+    #body-color {
+        margin-top: 50px;
+        width: 90px;
+    }
+    #seat-color {
+        margin-top: 150px;
+        width: 90px;
+
+    }
+    #Wheel-color {
+        margin-top: 250px;
+        width: 90px;
+
+    }
+    #handllebar-color {
+        margin-top: 350px;
+        width: 115px;
+    }
+    #list-color-body {
+        width: 250px;
+        margin-top: 85px;
+    }
+    #list-color-seat {
+        width: 250px;
+        margin-top: 185px;
+    }
+    #list-color-Wheel {
+        width: 250px;
+        margin-top: 285px;
+    }
+    #list-color-handllebar {
+        width: 250px;
+        margin-top: 385px;
+    }
+    .red {
+        width: 15px;
+    }
+    .blue {
+        width: 15px;
+    }
+    .silver {
+        width: 15px;
+    }
+    .green {
+        width: 15px;
+    }
+    .yellow {
+        width: 15px;
+    }
+    .orange {
+        width: 15px;
+    }
+    .gold {
+        width: 15px;
+    }
+    .brown {
+        width: 15px;
+    }
+    .white {
+        width: 15px;
+    }
+    .darkviolet {
+        width: 15px;
+    }
+    .cyan {
+        width: 15px;
+    }
+    .dimgray {
+        width: 15px;
+    }
+    .black {
+        width: 15px;
+    }
+    .crimson {
+        width: 15px;
+    }
+    #textp {
+        font-size: 2em;
+        margin-top: 10%;
+    }
+    #st {
+        font-size: 12px;
+        margin-left: 3px;
+        margin-top: 25px;
+    }
+}
+
+@media screen and (max-height:320px) {
+    #body-color {
+        margin-top: 30px;
+        width: 90px;
+    }
+    #seat-color {
+        margin-top: 90px;
+        width: 90px;
+
+    }
+    #Wheel-color {
+        margin-top: 160px;
+        width: 90px;
+
+    }
+    #handllebar-color {
+        margin-top: 230px;
+        width: 115px;
+    }
+    #list-color-body {
+        width: 250px;
+        margin-top: 55px;
+    }
+    #list-color-seat {
+        width: 250px;
+        margin-top: 115px;
+    }
+    #list-color-Wheel {
+        width: 250px;
+        margin-top: 185px;
+    }
+    #list-color-handllebar {
+        width: 250px;
+        margin-top: 255px;
+    }
+    #st {
+        font-size: 12px;
+        margin-left: 3px;
+        margin-top: 10px;
+    }
+}
