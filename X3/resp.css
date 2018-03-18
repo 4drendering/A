@@ -1,0 +1,82 @@
+html,body {
+            width: 100%;
+            height: 100%;
+            cursor:move;
+
+        }
+
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            overflow: hidden;
+            font-family: arial;
+        }
+
+        #blocker {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #instructions {
+            width: 100%;
+            height: 100%;
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            -webkit-box-orient: horizontal;
+            -moz-box-orient: horizontal;
+            box-orient: horizontal;
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            box-pack: center;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            box-align: center;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+        }
+#top{
+    background: red;
+   
+     position: absolute;
+}
+#bottom{
+    background: blue;
+     position: absolute;
+}
+#left{
+    background: green;
+    position: absolute;
+    
+}
+#right{
+    background: green;
+    position: absolute;
+}
+#divp{
+    font-size: 3em;font-weight: bold;
+}
+#cen{width:100%;height: 250px;margin-left: auto;margin-right: auto;margin-top:40%;}
+#textp{text-align: center;font-weight: bold;font-size:1.3em;}
+#load{width:170px;height: 20px;border: 2px solid black;margin-left: auto;margin-right: auto;}
+#por{width:8%;height: 100%; background-color:green;}
+
+#cen1{width:100%;height: 250px;margin-left: auto;margin-right: auto;margin-top:20%;}
+#textp1{text-align: center;font-weight: bold;font-size:1.3em;}
+#load1{width:170px;height: 20px;border: 2px solid black;margin-left: auto;margin-right: auto;}
+#por1{width:8%;height: 100%; background-color:green;}
+
+#op{width: 120%;height: 200%;background: black;opacity: 0.5;z-index: 100;color:white;margin-top:-100px;}
+
+@media screen and (min-width:320px) and (max-width:480px) {
+    #i1{width: 180px;height: 180px;}
+    #i2{width: 180px;height: 180px;}
+    #d1{margin-top:-45px;margin-left:57px;}
+    #d2{margin-top:170px;margin-left:57px;}
+    #t1{margin-left:-9px;padding-top:16px;}
+    #t2{margin-left:12px;padding-top:26px;}
+    #divp{font-size: 1em;font-weight: bold;}
+}
